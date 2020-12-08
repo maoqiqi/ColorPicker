@@ -16,9 +16,14 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-class ColorWheelView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr), ColorObservable {
+/**
+ * HSV color wheel
+ * author: March
+ * date: 2020-12-08 21:01
+ * version v1.0.0
+ */
+class ColorWheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    View(context, attrs, defStyleAttr), ColorObservable {
 
     private val tag = "ColorWheelView"
 
@@ -47,12 +52,6 @@ class ColorWheelView @JvmOverloads constructor(
                 it.intrinsicWidth.coerceAtLeast(it.intrinsicHeight) * 0.5f
             } else 10 * context.resources.displayMetrics.density
         }
-        Log.e(tag, "pointRadius=$pointRadius")
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        Log.e(tag, "onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)")
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -63,7 +62,6 @@ class ColorWheelView @JvmOverloads constructor(
         centerX = paddingLeft + width * 0.5f
         centerY = paddingTop + height * 0.5f
         radius = width.coerceAtMost(height) * 0.5f - pointRadius
-        Log.e(tag, "centerX=$centerX,centerY=$centerY,radius=$radius")
 
         val colors = intArrayOf(Color.RED, Color.MAGENTA, Color.BLUE, Color.CYAN, Color.GREEN, Color.YELLOW, Color.RED)
         // 扫描渐变
@@ -97,7 +95,6 @@ class ColorWheelView @JvmOverloads constructor(
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.e(tag, "onTouchEvent(event: MotionEvent?)")
         when (event?.actionMasked) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                 val x = event.x

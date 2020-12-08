@@ -7,9 +7,14 @@ import android.graphics.Paint
 import android.graphics.Shader
 import android.util.AttributeSet
 
-class AlphaSliderView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ColorSliderView(context, attrs, defStyleAttr) {
+/**
+ * Alpha Color Slider View
+ * author: March
+ * date: 2020-12-08 21:01
+ * version v1.0.0
+ */
+class AlphaSliderView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    ColorSliderView(context, attrs, defStyleAttr) {
 
     override fun configurePaint(color: Int, paint: Paint) {
         val hsv = FloatArray(3)
@@ -17,15 +22,7 @@ class AlphaSliderView @JvmOverloads constructor(
         val startColor = Color.HSVToColor(0, hsv)
         val endColor = Color.HSVToColor(255, hsv)
         val rect = getSeekBarRect()
-        paint.shader = LinearGradient(
-            rect.left,
-            0f,
-            rect.right,
-            0f,
-            startColor,
-            endColor,
-            Shader.TileMode.CLAMP
-        )
+        paint.shader = LinearGradient(rect.left, 0f, rect.right, 0f, startColor, endColor, Shader.TileMode.CLAMP)
     }
 
     override fun getColorByColor(color: Int, percentage: Float): Int {

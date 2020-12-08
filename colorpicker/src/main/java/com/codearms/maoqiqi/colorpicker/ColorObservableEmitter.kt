@@ -2,6 +2,12 @@ package com.codearms.maoqiqi.colorpicker
 
 import android.graphics.Color
 
+/**
+ * Color Observable Emitter
+ * author: March
+ * date: 2020-12-08 21:01
+ * version v1.0.0
+ */
 class ColorObservableEmitter : ColorObservable {
 
     private val observers: MutableList<ColorObserver> = mutableListOf()
@@ -23,8 +29,6 @@ class ColorObservableEmitter : ColorObservable {
 
     fun onColor(color: Int, fromUser: Boolean) {
         this.color = color
-        for (observer in observers) {
-            observer.onColor(color, fromUser)
-        }
+        observers.forEach { observer -> observer.onColor(color, fromUser) }
     }
 }

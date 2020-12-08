@@ -16,9 +16,14 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.graphics.toRect
 
-abstract class ColorSliderView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr), ColorObserver, ColorObservable {
+/**
+ * Color Slider View
+ * author: March
+ * date: 2020-12-08 21:01
+ * version v1.0.0
+ */
+abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    View(context, attrs, defStyleAttr), ColorObserver, ColorObservable {
 
     private val tag = "ColorSliderView"
 
@@ -41,11 +46,6 @@ abstract class ColorSliderView @JvmOverloads constructor(
         val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorSliderView)
         slider = typedArray.getDrawable(R.styleable.ColorSliderView_slider)
         typedArray.recycle()
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        Log.e(tag, "onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)")
     }
 
     fun getSeekBarRect(): RectF = seekBarRect
@@ -103,7 +103,6 @@ abstract class ColorSliderView @JvmOverloads constructor(
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.e(tag, "onTouchEvent(event: MotionEvent?)")
         when (event?.actionMasked) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
                 val x = event.x
@@ -133,7 +132,6 @@ abstract class ColorSliderView @JvmOverloads constructor(
     }
 
     fun setInitialColor(color: Int) {
-        Log.e(tag, "setInitialColor")
         this.baseColor = color
         emitter.setInitialColor(baseColor)
     }
