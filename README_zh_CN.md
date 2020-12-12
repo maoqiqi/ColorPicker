@@ -18,7 +18,7 @@ ColorPicker 一款标准的Android颜色选择器。
 * [用法](#用法)
 * [Description](#Description)
 * [About](#About)
-* [License](#License)
+* [开源协议](#开源协议)
 
 
 ## 截图

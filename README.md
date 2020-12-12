@@ -39,6 +39,58 @@ implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
 
 ## Usage
 
+### ColorWheelView
+
+将ColorWheelView添加到需要的布局文件中：
+
+```
+<com.codearms.maoqiqi.colorpicker.ColorWheelView
+    android:id="@+id/color_wheel_view"
+    android:layout_width="match_parent"
+    android:layout_height="320dp"
+    app:pointer="@drawable/ic_point" />
+```
+
+实现ColorObserver观察者接口并从ColorWheelView订阅颜色更新事件。
+
+```
+colorWheelView.subscribe(object : ColorObserver {
+     override fun onColor(color: Int, fromUser: Boolean) {
+         Log.e("info", "observable,color=$color,${colorHex(color)},fromUser=$fromUser")
+     }
+ })
+```
+
+设置选择器的初始颜色值：
+
+```
+colorWheelView.setInitialColor(Color.parseColor("#BFB40015"))
+```
+
+### ColorSliderView
+
+#### BrightnessSliderView
+
+```
+<com.codearms.maoqiqi.colorpicker.BrightnessSliderView
+    android:id="@+id/brightness_slider_view"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:padding="8dp" />
+```
+
+#### AlphaSliderView
+
+```
+<com.codearms.maoqiqi.colorpicker.AlphaSliderView
+    android:id="@+id/alpha_slider_view"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:padding="8dp"
+    app:slider="@drawable/shape_slider" />
+```
+
+完整的示例代码请查阅示例。
 
 ## License
 
