@@ -7,6 +7,8 @@
 [![Author](https://img.shields.io/badge/Author-March-orange.svg)](fengqi.mao.march@gmail.com)
 
 <p align="center">English | </p>
+
+
 [中文](README_zh_CN.md)
 
 ColorPicker is a standard Android color selector.
