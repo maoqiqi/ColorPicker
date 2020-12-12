@@ -11,11 +11,11 @@ English | [中文](README_zh_CN.md)
 ColorPicker is a standard Android color selector.
 
 
-## 目录
+## Catalog
 
+* [Screenshot](#Screenshot)
 * [Download](#Download)
 * [Usage](#Usage)
-* [Screenshot](#Screenshot)
 * [Description](#Description)
 * [About](#About)
 * [License](#License)
@@ -27,12 +27,13 @@ ColorPicker is a standard Android color selector.
 <img src="/screenshot/Screenshot_2.png" width="280px" />
 <img src="/screenshot/Screenshot_3.png" width="280px" />
 
+
 ## Download
 
-Download [the JARs](https://jcenter.bintray.com/com/codearms/maoqiqi/lazyload) or configure this dependency:
+Download [the JARs](https://jcenter.bintray.com/com/codearms/maoqiqi/colorpicker) or configure this dependency:
 
 ```
-implementation 'com.codearms.maoqiqi:lazyload:1.1.0'
+implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
 ```
 
 
