@@ -1,7 +1,6 @@
 # ColorPicker
 
 [![JCenter](https://img.shields.io/badge/JCenter-1.0.0-brightgreen.svg)](https://bintray.com/maoqiqi/ColorPicker/colorpicker/_latestVersion)
-[![Latest Stable Version](https://api.bintray.com/packages/maoqiqi/ColorPicker/colorpicker/images/download.svg)](https://bintray.com/maoqiqi/ColorPicker/colorpicker/_latestVersion)
 [![Min Sdk Version](https://img.shields.io/badge/API-16%2B-brightgreen.svg)](https://developer.android.com/about/versions/android-4.1.html)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Author](https://img.shields.io/badge/Author-March-orange.svg)](fengqi.mao.march@gmail.com)
@@ -30,7 +29,7 @@ ColorPicker 一款标准的Android颜色选择器。
 
 ## 下载
 
-Download [the JARs](https://jcenter.bintray.com/com/codearms/maoqiqi/colorpicker) or configure this dependency:
+下载[JAR包](https://jcenter.bintray.com/com/codearms/maoqiqi/colorpicker)或配置此依赖项:
 
 ```
 implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
