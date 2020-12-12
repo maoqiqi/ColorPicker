@@ -39,6 +39,77 @@ implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
 
 ## 用法
 
+### ColorWheelView
+
+将ColorWheelView添加到需要的布局文件中：
+
+```
+<com.codearms.maoqiqi.colorpicker.ColorWheelView
+    android:id="@+id/color_wheel_view"
+    android:layout_width="match_parent"
+    android:layout_height="320dp"
+    app:pointer="@drawable/ic_point" />
+```
+
+支持自定义滑块，可以是图片，也可以是自定义shape，同时可以指定大小，不指定使用默认大小。
+
+实现ColorObserver观察者接口并从ColorWheelView订阅颜色更新事件。
+
+```
+colorWheelView.subscribe(object : ColorObserver {
+     override fun onColor(color: Int, fromUser: Boolean) {
+         Log.e("info", "observable,color=$color,${colorHex(color)},fromUser=$fromUser")
+     }
+ })
+```
+
+设置选择器的初始颜色值：
+
+```
+colorWheelView.setInitialColor(Color.parseColor("#BFB40015"))
+```
+
+### ColorSliderView
+
+ColorSliderView是BrightnessSliderView和AlphaSliderView父类，实现拖动滑块变色。
+
+#### BrightnessSliderView
+
+```
+<com.codearms.maoqiqi.colorpicker.BrightnessSliderView
+    android:id="@+id/brightness_slider_view"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:padding="8dp" />
+```
+
+绑定ColorWheelView，颜色变化自动监听：
+
+```
+brightnessSliderView.bindColorWheelView(colorWheelView)
+```
+
+#### AlphaSliderView
+
+```
+<com.codearms.maoqiqi.colorpicker.AlphaSliderView
+    android:id="@+id/alpha_slider_view"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:padding="8dp"
+    app:slider="@drawable/shape_slider" />
+```
+
+绑定BrightnessSliderView，颜色变化自动监听：
+
+```
+alphaSliderView.bindColorWheelView(brightnessSliderView)
+```
+
+BrightnessSliderView和AlphaSliderView可以绑定ColorWheelView、AlphaSliderView、BrightnessSliderView。
+
+完整的示例代码请查阅示例。
+
 
 ## 开源协议
 
