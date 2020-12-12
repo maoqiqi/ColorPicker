@@ -51,7 +51,7 @@ implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
     app:pointer="@drawable/ic_point" />
 ```
 
-支持自定义滑块，可以是图片，也可以是自定义shape，同时可以指定大小，不指定使用默认大小。
+支持自定义滑块，可以是图片，也可以是自定义shape，同时可以指定大小，如果不指定使用默认大小。
 
 实现ColorObserver观察者接口并从ColorWheelView订阅颜色更新事件。
 
@@ -107,8 +107,6 @@ alphaSliderView.bindColorWheelView(brightnessSliderView)
 ```
 
 BrightnessSliderView和AlphaSliderView可以绑定ColorWheelView、AlphaSliderView、BrightnessSliderView。
-
-完整的示例代码请查阅示例。
 
 
 ## 开源协议

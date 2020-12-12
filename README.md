@@ -41,7 +41,7 @@ implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
 
 ### ColorWheelView
 
-将ColorWheelView添加到需要的布局文件中：
+Add the ColorWheelView to the desired layout file：
 
 ```
 <com.codearms.maoqiqi.colorpicker.ColorWheelView
@@ -51,9 +51,9 @@ implementation 'com.codearms.maoqiqi:colorpicker:1.0.0'
     app:pointer="@drawable/ic_point" />
 ```
 
-支持自定义滑块，可以是图片，也可以是自定义shape，同时可以指定大小，不指定使用默认大小。
+Supports custom slider, which can be image or shape, and can specify the size, if not the default size.
 
-实现ColorObserver观察者接口并从ColorWheelView订阅颜色更新事件。
+Implement the ColorObserver observer interface and subscribe to color update events from the ColorWheelView。
 
 ```
 colorWheelView.subscribe(object : ColorObserver {
@@ -63,7 +63,7 @@ colorWheelView.subscribe(object : ColorObserver {
  })
 ```
 
-设置选择器的初始颜色值：
+Sets the initial color value for the selector：
 
 ```
 colorWheelView.setInitialColor(Color.parseColor("#BFB40015"))
@@ -71,7 +71,7 @@ colorWheelView.setInitialColor(Color.parseColor("#BFB40015"))
 
 ### ColorSliderView
 
-ColorSliderView是BrightnessSliderView和AlphaSliderView父类，实现拖动滑块变色。
+ColorSliderView is the BrightnessSliderView and AlphaSliderView parent class，Change color by dragging the slider。
 
 #### BrightnessSliderView
 
@@ -83,7 +83,7 @@ ColorSliderView是BrightnessSliderView和AlphaSliderView父类，实现拖动滑
     android:padding="8dp" />
 ```
 
-绑定ColorWheelView，颜色变化自动监听：
+Bind ColorWheelView to automatically listen for color changes：
 
 ```
 brightnessSliderView.bindColorWheelView(colorWheelView)
@@ -100,15 +100,13 @@ brightnessSliderView.bindColorWheelView(colorWheelView)
     app:slider="@drawable/shape_slider" />
 ```
 
-绑定BrightnessSliderView，颜色变化自动监听：
+Bind BrightnessSliderView to automatically listen for color changes：
 
 ```
 alphaSliderView.bindColorWheelView(brightnessSliderView)
 ```
 
-BrightnessSliderView和AlphaSliderView可以绑定ColorWheelView、AlphaSliderView、BrightnessSliderView。
-
-完整的示例代码请查阅示例。
+BrightnessSliderView and AlphaSliderView can be tied to ColorWheelView, AlphaSliderView, and BrightnessSliderView.
 
 
 ## License
