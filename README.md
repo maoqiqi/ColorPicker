@@ -24,7 +24,7 @@ ColorPicker is a standard Android color selector.
 
 <img src="/screenshot/Screenshot_1.png" width="280px" />
 <img src="/screenshot/Screenshot_2.png" width="280px" />
-<img src="/screenshot/Screenshot_3.png" width="280px" />
+<img src="/screenshot/Screenshot_3.gif" width="280px" />
 
 
 ## Download
