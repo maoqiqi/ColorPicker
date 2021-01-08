@@ -24,7 +24,7 @@ import android.graphics.Shader
 import android.util.AttributeSet
 
 /**
- * Alpha Color Slider View
+ * Color alpha Slider View
  * author: March
  * date: 2020-12-08 21:01
  * version v1.0.0
@@ -38,15 +38,18 @@ class AlphaSliderView @JvmOverloads constructor(context: Context, attrs: Attribu
         val startColor = Color.HSVToColor(0, hsv)
         val endColor = Color.HSVToColor(255, hsv)
         val rect = getSeekBarRect()
-        paint.shader = LinearGradient(rect.left, 0f, rect.right, 0f, startColor, endColor, Shader.TileMode.CLAMP)
+        paint.shader = (if (isReversal())
+            LinearGradient(rect.left, 0f, rect.right, 0f, endColor, startColor, Shader.TileMode.CLAMP)
+        else
+            LinearGradient(rect.left, 0f, rect.right, 0f, startColor, endColor, Shader.TileMode.CLAMP))
     }
 
-    override fun getColorByColor(color: Int, percentage: Float): Int {
+    override fun getColorByPercentage(color: Int, percentage: Float): Int {
         val hsv = FloatArray(3)
         Color.colorToHSV(color, hsv)
-        val alpha = (percentage * 255).toInt()
+        val alpha = ((if (isReversal()) 1.0f - percentage else percentage) * 255).toInt()
         return Color.HSVToColor(alpha, hsv)
     }
 
-    override fun getPercentByColor(color: Int): Float = Color.alpha(color) / 255f
+    override fun getPercentByColor(color: Int): Float = if (isReversal()) 1.0f - Color.alpha(color) / 255f else Color.alpha(color) / 255f
 }

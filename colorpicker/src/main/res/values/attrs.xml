@@ -17,9 +17,19 @@
 
 <resources>
     <declare-styleable name="ColorWheelView">
+        <attr name="style" format="integer">
+            <enum name="fill" value="0" />
+            <enum name="stroke" value="1" />
+        </attr>
+        <attr name="thickness" format="dimension" />
         <attr name="pointer" format="reference" />
+        <attr name="outsideTouch" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ColorSliderView">
         <attr name="slider" format="reference" />
+        <attr name="reversal" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="BlurMaskView">
+        <attr name="light" format="reference" />
     </declare-styleable>
 </resources>

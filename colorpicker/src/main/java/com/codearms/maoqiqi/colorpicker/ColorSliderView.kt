@@ -27,7 +27,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.graphics.toRect
@@ -41,8 +40,6 @@ import androidx.core.graphics.toRect
 abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     View(context, attrs, defStyleAttr), ColorObserver, ColorObservable {
 
-    private val tag = "ColorSliderView"
-
     private var baseColor = Color.WHITE
     private var seekBarHeight = 0f
     private var sliderWidth = 0f
@@ -50,6 +47,7 @@ abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs
     private var currentPercentage = 0f
     private var isBindColorWheelView = false
     private var slider: Drawable? = null
+    private var reversal: Boolean = false
 
     private val seekBarRect = RectF()
     private val sliderRect = RectF()
@@ -61,14 +59,16 @@ abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs
     init {
         val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorSliderView)
         slider = typedArray.getDrawable(R.styleable.ColorSliderView_slider)
+        reversal = typedArray.getBoolean(R.styleable.ColorSliderView_reversal, false)
         typedArray.recycle()
     }
 
     fun getSeekBarRect(): RectF = seekBarRect
 
+    fun isReversal(): Boolean = reversal
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        Log.e(tag, "onSizeChanged(),w=$w,h=$h,oldw=$oldw,oldh=$oldh")
         // 默认值
         seekBarHeight = (h - paddingTop - paddingBottom) * 0.5f
         sliderWidth = seekBarHeight
@@ -77,7 +77,7 @@ abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs
         if (slider == null) {
             val radius = seekBarHeight * 0.25f
             val outerRadii = floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
-            slider = ShapeDrawable(RoundRectShape(outerRadii, null, null)).apply { paint.apply { color = Color.BLACK } }
+            slider = ShapeDrawable(RoundRectShape(outerRadii, null, null)).apply { paint.color = Color.BLACK }
         }
 
         slider?.let {
@@ -126,7 +126,7 @@ abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs
                 if (isInRectangle(x, y)) {
                     checkPoint(x)
                     invalidate()
-                    emitter.onColor(getColorByColor(baseColor, currentPercentage), true)
+                    emitter.onColor(getColorByPercentage(baseColor, currentPercentage), true)
                 }
                 return true
             }
@@ -153,11 +153,10 @@ abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs
     }
 
     override fun onColor(color: Int, fromUser: Boolean) {
-        Log.e(tag, "onColor,color=$color,fromUser=$fromUser")
         this.baseColor = color
         configurePaint(baseColor, seekBarPaint)
         if (fromUser) {
-            emitter.onColor(getColorByColor(baseColor, currentPercentage), fromUser)
+            emitter.onColor(getColorByPercentage(baseColor, currentPercentage), fromUser)
         } else {
             currentPercentage = getPercentByColor(baseColor)
             emitter.onColor(baseColor, fromUser)
@@ -188,7 +187,7 @@ abstract class ColorSliderView @JvmOverloads constructor(context: Context, attrs
 
     abstract fun configurePaint(color: Int, paint: Paint)
 
-    abstract fun getColorByColor(color: Int, percentage: Float): Int
+    abstract fun getColorByPercentage(color: Int, percentage: Float): Int
 
     abstract fun getPercentByColor(color: Int): Float
 }
