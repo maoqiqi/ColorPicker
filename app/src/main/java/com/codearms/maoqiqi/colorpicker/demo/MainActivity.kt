@@ -27,6 +27,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val color = "#BFB46973"
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +36,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             colorWheelView.subscribe(observable1)
-            colorWheelView.setInitialColor(Color.parseColor("#BFB40015"))
+            colorWheelView.setInitialColor(Color.parseColor(color))
 
-            brightnessSliderView.bindColorWheelView(colorWheelView)
-            brightnessSliderView.subscribe(observable2)
+            saturationSliderView.bindColorWheelView(colorWheelView)
+            saturationSliderView.subscribe(observable2)
 
-            alphaSliderView.bindColorWheelView(brightnessSliderView)
+            alphaSliderView.bindColorWheelView(saturationSliderView)
             alphaSliderView.subscribe(observable3)
+            alphaSliderView.subscribe(blurMaskView)
+
+            editHex.setText(color)
         }
     }
 
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             Log.e("info", "observable3,color=$color,${colorHex(color)},fromUser=$fromUser")
             binding.view.setBackgroundColor(color)
             binding.editHex.setText(colorHex(color))
+            binding.editHex.setSelection(binding.editHex.text.toString().length)
         }
     }
 
@@ -75,10 +80,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         binding.apply {
-            alphaSliderView.unsubscribe(brightnessSliderView)
-            brightnessSliderView.unbindColorWheelView(colorWheelView)
+            alphaSliderView.unsubscribe(saturationSliderView)
+            saturationSliderView.unbindColorWheelView(colorWheelView)
             alphaSliderView.unsubscribe(observable3)
-            brightnessSliderView.unsubscribe(observable2)
+            saturationSliderView.unsubscribe(observable2)
             colorWheelView.unsubscribe(observable1)
         }
         super.onDestroy()

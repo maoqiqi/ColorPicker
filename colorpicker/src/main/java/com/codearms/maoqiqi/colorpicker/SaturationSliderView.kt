@@ -24,12 +24,12 @@ import android.graphics.Shader
 import android.util.AttributeSet
 
 /**
- * Brightness Color Slider View
+ * Color saturation Slider View
  * author: March
  * date: 2020-12-08 21:01
  * version v1.0.0
  */
-class BrightnessSliderView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class SaturationSliderView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     ColorSliderView(context, attrs, defStyleAttr) {
 
     override fun configurePaint(color: Int, paint: Paint) {
@@ -40,19 +40,22 @@ class BrightnessSliderView @JvmOverloads constructor(context: Context, attrs: At
         hsv[2] = 1f
         val endColor = Color.HSVToColor(hsv)
         val rect = getSeekBarRect()
-        paint.shader = LinearGradient(rect.left, 0f, rect.right, 0f, startColor, endColor, Shader.TileMode.CLAMP)
+        paint.shader = (if (isReversal())
+            LinearGradient(rect.left, 0f, rect.right, 0f, endColor, startColor, Shader.TileMode.CLAMP)
+        else
+            LinearGradient(rect.left, 0f, rect.right, 0f, startColor, endColor, Shader.TileMode.CLAMP))
     }
 
-    override fun getColorByColor(color: Int, percentage: Float): Int {
+    override fun getColorByPercentage(color: Int, percentage: Float): Int {
         val hsv = FloatArray(3)
         Color.colorToHSV(color, hsv)
-        hsv[2] = percentage
+        hsv[2] = if (isReversal()) 1.0f - percentage else percentage
         return Color.HSVToColor(hsv)
     }
 
     override fun getPercentByColor(color: Int): Float {
         val hsv = FloatArray(3)
         Color.colorToHSV(color, hsv)
-        return hsv[2]
+        return if (isReversal()) 1.0f - hsv[2] else hsv[2]
     }
 }
