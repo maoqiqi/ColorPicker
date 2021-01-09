@@ -45,6 +45,7 @@ class ColorWheelView @JvmOverloads constructor(context: Context, attrs: Attribut
     private var radius = 0f
     private var style = 0
     private var pointer: Drawable? = null
+    private var strokeColor = Color.BLACK
     private var outsideTouch: Boolean = false
     private var pointRadius = 0f
     private var pointRect = Rect()
@@ -61,6 +62,7 @@ class ColorWheelView @JvmOverloads constructor(context: Context, attrs: Attribut
         val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.ColorWheelView)
         style = typedArray.getInteger(R.styleable.ColorWheelView_style, style)
         pointer = typedArray.getDrawable(R.styleable.ColorWheelView_pointer)
+        strokeColor = typedArray.getColor(R.styleable.ColorWheelView_strokeColor, strokeColor)
         outsideTouch = typedArray.getBoolean(R.styleable.ColorWheelView_outsideTouch, outsideTouch)
         typedArray.recycle()
 
@@ -75,7 +77,7 @@ class ColorWheelView @JvmOverloads constructor(context: Context, attrs: Attribut
         if (isStroke()) {
             colorsPaint.style = Paint.Style.STROKE
             colorsPaint.strokeWidth = 2 * pointRadius
-            pointPaint.color = Color.BLACK
+            pointPaint.color = strokeColor
             pointPaint.style = Paint.Style.STROKE
             pointPaint.strokeWidth = pointRadius
         }
@@ -101,9 +103,9 @@ class ColorWheelView @JvmOverloads constructor(context: Context, attrs: Attribut
         val r = if (isStroke()) radius else hsv[1] * radius
         val radian = Math.toRadians(hsv[0].toDouble()).toFloat()
         checkPoint(r * cos(radian) + centerX, -r * sin(radian) + centerY)
-        emitter.onColor(getColor(), false)
+        emitter.onColor(getColorByPoint(currentPoint.x, currentPoint.y), false)
         if (isStroke()) {
-            pointer?.let { DrawableCompat.setTint(it, getColorByPoint(currentPoint.x, currentPoint.y)) }
+            pointer?.let { DrawableCompat.setTint(it, getColor()) }
         }
     }
 

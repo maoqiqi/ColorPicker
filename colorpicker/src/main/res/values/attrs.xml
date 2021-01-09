@@ -21,8 +21,8 @@
             <enum name="fill" value="0" />
             <enum name="stroke" value="1" />
         </attr>
-        <attr name="thickness" format="dimension" />
         <attr name="pointer" format="reference" />
+        <attr name="strokeColor" format="color" />
         <attr name="outsideTouch" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ColorSliderView">

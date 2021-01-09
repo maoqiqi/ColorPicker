@@ -22,17 +22,17 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.codearms.maoqiqi.colorpicker.ColorObserver
-import com.codearms.maoqiqi.colorpicker.demo.databinding.ActivityMainBinding
+import com.codearms.maoqiqi.colorpicker.demo.databinding.ActivityColorWheelBinding
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class ColorWheelActivity : AppCompatActivity() {
 
     private val color = "#BFB46973"
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityColorWheelBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_color_wheel)
 
         binding.apply {
             colorWheelView.subscribe(observable1)
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
             alphaSliderView.bindColorWheelView(saturationSliderView)
             alphaSliderView.subscribe(observable3)
-            alphaSliderView.subscribe(blurMaskView)
 
             editHex.setText(color)
         }
